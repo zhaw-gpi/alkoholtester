@@ -4,16 +4,16 @@ import java.util.Scanner;
 
 import app.logic.AlkTest;
 
-public class Kommandozeile {
-    private AlkTest tester = new AlkTest();
+public class CommandLineInterface {
+    private AlkTest alkTest = new AlkTest();
 
-    public void commandLine() {
+    public void startCli() {
         String cmdInput = "";
         Scanner keyScan = new Scanner(System.in);
 
         System.out.println("\nAnzahl Sekunden in einer Stunde (Default 3600)> ");
         int secondsPerHour = keyScan.nextInt();
-        tester.secondsOfHour = secondsPerHour;
+        alkTest.secondsOfHour = secondsPerHour;
 
         while (!cmdInput.equals("exit")) {
             System.out.print("\nCMD (config, drink, test, print, exit)> ");
@@ -22,7 +22,7 @@ public class Kommandozeile {
                 System.out.println("Bier (0), Wein (1), Likör(2), Schnaps(3)>");
                 int drink = keyScan.nextInt();
                 keyScan.nextLine();
-                tester.addKonsum(drink);
+                alkTest.addKonsum(drink);
             } else if (cmdInput.equals("config")) {
                 System.out.println("Frau (f) oder Mann (m)>");
                 String s = keyScan.nextLine();
@@ -32,15 +32,15 @@ public class Kommandozeile {
                 System.out.println("Gewicht>");
                 int weight = keyScan.nextInt();
                 keyScan.nextLine();
-                tester.setPerson(weight, s.equals("f"));
+                alkTest.setPerson(weight, s.equals("f"));
             } else if (cmdInput.equals("test")) {
-                if (tester.hasPerson()) {
-                    System.out.println("Alkoholwert: " + tester.getCurrentLevel());
+                if (alkTest.hasPerson()) {
+                    System.out.println("Alkoholwert: " + alkTest.getCurrentLevel());
                 } else {
                     System.out.println("Bitte zuerst Angaben zur Person erfassen");
                 }
             } else if (cmdInput.equals("print")) {
-                tester.printAll();
+                alkTest.printAll();
             }
         }
         keyScan.close();
