@@ -9,6 +9,5 @@ public class Wein extends Getraenk {
         super();
         this.alcLevel = 0.1;
         this.amountMilli = 200;
-        this.name = "Wein";
     }
 }

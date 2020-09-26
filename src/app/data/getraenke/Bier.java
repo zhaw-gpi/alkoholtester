@@ -9,6 +9,5 @@ public class Bier extends Getraenk {
         super();
         this.alcLevel = 0.05;
         this.amountMilli = 300;
-        this.name = "Bier";
     }
 }

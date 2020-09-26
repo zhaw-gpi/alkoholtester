@@ -17,25 +17,30 @@ public class AlkTest {
     private Person person;
     private ArrayList<Getraenk> konsum = new ArrayList<>();
     public static int secondsOfHour = 3600;
+    private static final double ABBAURATEPROSTUNDE = 0.15;
 
-    public void setPerson(double weight, boolean isFemale){
-        person = new Person(weight, isFemale);
-    }
-
-    public Person getPerson(){
+    public Person getPerson() {
         return person;
     }
 
-    public boolean hasPerson(){
+    public void setPerson(double weight, boolean isFemale) {
+        this.person = new Person(isFemale, weight);
+    }
+
+    public boolean hasPerson() {
         return person != null;
     }
 
-    public void print(){
+    public void printPerson() {
         person.print();
     }
 
-    public void addKonsum(int drink){
-        switch(drink){
+    public ArrayList<Getraenk> getKonsum() {
+        return konsum;
+    }
+
+    public void addKonsum(int drink) {
+        switch (drink) {
             case 0:
                 konsum.add(new Bier());
                 break;
@@ -47,50 +52,43 @@ public class AlkTest {
                 break;
             case 3:
                 konsum.add(new Schnaps());
+                break;
+            default:
+                break;
         }
-    }
-
-    public ArrayList<Getraenk> getKonsum(){
-        return konsum;
     }
 
     public void printAll(){
-        System.out.println("");
-        print();
+        this.printPerson();
 
-        for (Getraenk getraenk : konsum) {
+        System.out.println("");
+
+        for (Getraenk g : konsum) {
+            g.print();
             System.out.println("");
-            getraenk.print();
         }
     }
 
-    public double getCurrentLevel() {
-		double level = 0;
-		
-		for (int i=0; i < konsum.size(); i++) {
-			Getraenk drink = konsum.get(i);
-			// Alkohol des neuen Getraenks zu Blutalkoholgehalt addieren
-			level += drink.getAlcTotal() / person.getDistribution();
+    public double getCurrentLevel(){
+        double level = 0.0;
+        long timeDiff;
+        double abbaurate = ABBAURATEPROSTUNDE / secondsOfHour;
 
-			// Abbau seit letztem Getraenk berechnen und subtrahieren
-			double abbaurateProSekunde = 0.15d / secondsOfHour;
-			if (i != konsum.size() - 1) {
-				// alle Getraenke ausser letztes Getraenk
-				Getraenk nextDrink = konsum.get(i + 1);
-				// Zeit zwischen Getraenken berechnen
-				double deltaSec = (nextDrink.getTimeMilli() - drink.getTimeMilli()) / 1000d;
-				level -= abbaurateProSekunde * deltaSec;
-			} else {
-				// letztes Getraenk, vergangene Zeit berechnen
-				double deltaSec = drink.getDiffSeconds();
-				level -= abbaurateProSekunde * deltaSec;
-			}
 
-			if (level < 0) {
-				level = 0;
-			}
-		}
+        for (int i = 0; i < this.konsum.size(); i++) {
+            Getraenk getraenk = this.konsum.get(i);
+            level += getraenk.getAlcTotal() / this.person.getDistribution();
 
-		return level;
-	}
+            if(i < this.konsum.size() - 1){
+                Getraenk nextGetraenk = this.konsum.get(i + 1);
+                timeDiff = (nextGetraenk.getTimeMilli() - getraenk.getTimeMilli()) / 1000;
+            } else {
+                timeDiff = getraenk.getDiffSeconds();
+            }
+
+            level -= timeDiff * abbaurate;
+        }
+
+        return (level < 0 ? 0.0 : level);
+    }
 }

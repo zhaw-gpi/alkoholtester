@@ -28,7 +28,7 @@ public class Getraenk {
     }
 
     public void print(){
-        System.out.println("Getränk:\t" + name);
+        System.out.println("Getränk:\t" + this.getClass().getSimpleName());
         System.out.println("Konsum vor " + getDiffSeconds() + " Sekunden");
         System.out.println("Menge:\t" + amountMilli + " Milliliter");
         System.out.println("Gehalt:\t" + alcLevel + " %");

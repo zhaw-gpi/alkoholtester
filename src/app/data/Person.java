@@ -12,7 +12,7 @@ public class Person {
     private static double rFemale = 0.6;
     private static double rMale = 0.7;
 
-    public Person(double weight, boolean isFemale){
+    public Person(boolean isFemale, double weight){
         this.weight = weight;
         this.isFemale = isFemale;
         this.distribution = weight * (isFemale ? rFemale : rMale);

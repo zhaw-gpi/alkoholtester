@@ -9,6 +9,5 @@ public class Schnaps extends Getraenk {
         super();
         this.alcLevel = 0.4;
         this.amountMilli = 20;
-        this.name = "Schnaps";
     }
 }

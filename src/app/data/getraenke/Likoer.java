@@ -9,6 +9,5 @@ public class Likoer extends Getraenk {
         super();
         this.alcLevel = 0.2;
         this.amountMilli = 100;
-        this.name = "Likör";
     }
 }
