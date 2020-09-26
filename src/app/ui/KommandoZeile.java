@@ -4,7 +4,7 @@ import java.util.Scanner;
 
 import app.logic.AlkTest;
 
-public class CommandLineInterface {
+public class KommandoZeile {
     private AlkTest alkTest = new AlkTest();
 
     public void startCli() {
@@ -13,7 +13,7 @@ public class CommandLineInterface {
 
         System.out.println("\nAnzahl Sekunden in einer Stunde (Default 3600)> ");
         int secondsPerHour = keyScan.nextInt();
-        alkTest.secondsOfHour = secondsPerHour;
+        AlkTest.secondsOfHour = secondsPerHour;
 
         while (!cmdInput.equals("exit")) {
             System.out.print("\nCMD (config, drink, test, print, exit)> ");

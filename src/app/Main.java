@@ -1,6 +1,6 @@
 package app;
 
-import app.ui.CommandLineInterface;
+import app.ui.KommandoZeile;
 
 /**
  * Main
@@ -8,7 +8,7 @@ import app.ui.CommandLineInterface;
 public class Main {
 
     public static void main(String[] args) {
-        CommandLineInterface cli = new CommandLineInterface();
+        KommandoZeile cli = new KommandoZeile();
         cli.startCli();
     }
 }
